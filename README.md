@@ -9,6 +9,7 @@ Usuarios: Los usuarios pueden registrarse, y los datos se almacenan en nuestra b
 Vuelos: Tenemos en cuenta que un vuelo puede contener a más de un pasajero, y cada vuelo tiene información específica como destino, vuelo, etc.
 
 Diagrama:
+![image](https://github.com/user-attachments/assets/8d49f6ee-7d7c-4d66-8fed-a0e564e9ae98)
 
  
 
