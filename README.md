@@ -23,4 +23,4 @@ Vuelos: Tenemos en cuenta que un vuelo puede contener a más de un pasajero, per
 
  
 
-
+En el diagrama podemos ver que la relacion es 1-->N. Donde 1 son los vuelos(ya que los usuarios pueden tener 1 vuelo), y N los usuarios(los vuelos tienen N usuarios)
