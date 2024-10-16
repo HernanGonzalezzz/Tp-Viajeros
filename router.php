@@ -20,12 +20,24 @@ switch ($parametro[0]){
 
         break;
     case 'Vuelos':
-        $controlador = new Controlador();
+        $controlador = new ControladorVuelo();
         $controlador->listarVuelos();
         break;
     case 'Vuelo':
-        $controlador = new Controlador();
+        $controlador = new ControladorVuelo();
         $controlador->listarVuelo($parametro[1]);
+        break;
+    case 'Guardar':
+        $controlador = new ControladorVuelo();
+        $controlador->guardarVuelo();
+        break;
+    case 'Eliminar':
+        $controlador = new ControladorVuelo();
+        $controlador->sacarVuelo($parametro[1]);
+        break;
+    case 'Modificar':
+        $controlador = new ControladorVuelo();
+        $controlador->modificarVuelo($parametro[1], $parametro[2], $parametro[3]);
         break;
     case 'Usuarios':
         break;
