@@ -1,9 +1,9 @@
 <?php
 
-require_once './app/model/modeloVuelo.php'
-require_once './app/vista/vista.php'
+require_once './app/model/modeloVuelo.php';
+require_once './app/views/vista.php';
 
-class ControladorVuelo(){
+class ControladorVuelo{
     private $modeloVuelo;
     private $vista;
 
@@ -54,7 +54,7 @@ class ControladorVuelo(){
                         $this->modeloVuelo->modificarSalida($id, $valor);
                         break;
                     case 'destino':
-                        $this->modeloVuelo->modificarDestino($id, $valor)
+                        $this->modeloVuelo->modificarDestino($id, $valor);
                         break;
                     case 'avion':
                         $this->modeloVuelo->modificarAvion($id, $valor);

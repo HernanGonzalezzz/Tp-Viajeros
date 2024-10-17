@@ -1,0 +1,14 @@
+
+
+<div class="container overflow-hidden text-center">
+    <?php foreach($vuelos as $vuelo):?>
+        <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title"><?= htmlspecialchars($vuelo->salida) ?> | <?= htmlspecialchars($vuelo->destino) ?> </h5>
+            <p class="card-text">Precio por persona : <?php $vuelo->precio ?></p>
+            <a href="#" class="btn btn-primary">Reservar</a>
+        </div>
+        </div>
+    <?php endforeach ?>
+</div>
