@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2024 a las 17:13:51
+-- Tiempo de generación: 18-10-2024 a las 16:09:43
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -30,24 +30,22 @@ SET time_zone = "+00:00";
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
-  `documento` int(8) NOT NULL,
-  `email` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci NOT NULL,
-  `id_vuelo` int(11) DEFAULT NULL,
-  `clave` text NOT NULL,
+  `email` text DEFAULT NULL,
+  `clave` char(60) NOT NULL,
   `administrador` tinyint(1) DEFAULT NULL,
-  `usuario_Id` text NOT NULL
+  `id_vuelo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `documento`, `email`, `id_vuelo`, `clave`, `administrador`, `usuario_Id`) VALUES
-(1, 'Raul', 42987925, 'EmailRaul@hotmail.com', 1, '', 0, 'Raul123'),
-(2, 'Franco', 42982312, 'EmailFranco@hotmail.com', 1, '', 0, 'Franco123'),
-(10, 'Jose', 12459863, 'EmailJose@hotmail.com', NULL, '', 0, 'Jose123'),
-(12, 'Javier', 35698756, 'EmailJavier@hotmial.com', 2, '', 0, 'Javier123'),
-(13, 'Pedro', 25478963, 'EmailPedro@hotmial.com', 2, '', 0, 'Pedro123');
+INSERT INTO `usuarios` (`id`, `nombre`, `email`, `clave`, `administrador`, `id_vuelo`) VALUES
+(1, 'Raul', 'EmailRaul@hotmail.com', '', 0, 1),
+(2, 'Franco', 'EmailFranco@hotmail.com', '', 0, 1),
+(10, 'Jose', 'EmailJose@hotmail.com', '', 0, NULL),
+(12, 'Javier', 'EmailJavier@hotmail.com', '', 0, 2),
+(13, 'Pedro', 'EmailPedro@hotmail.com', '', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -85,7 +83,7 @@ INSERT INTO `vuelos` (`id`, `salida`, `destino`, `avion`, `hs_salida`, `hs_llega
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `DNI` (`documento`);
+  ADD UNIQUE KEY `email` (`email`) USING HASH;
 
 --
 -- Indices de la tabla `vuelos`

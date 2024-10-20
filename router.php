@@ -1,12 +1,16 @@
 <?php
 
-require_once './app/controller/controladorVuelo.php';
+require_once './libs/response.php';
+require_once './app/middlewares/guardaSesion.php';
+require_once './app/controller/controlador.php';
+require_once './app/controller/controladorLogin.php';
 
 // base_url para redirecciones y base tag
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
+$res = new Response(); //Donde guardamos el usuario si es que existe
 
-$action = 'home';
+$action = 'vuelos';
 
 if(!empty($_GET['action'])){
     $action = $_GET['action'];
@@ -17,33 +21,51 @@ $parametro = explode('/', $action);
 
 switch ($parametro[0]){
     case 'home':
-        require_once './templates/home.phtml';
+        require_once 'saludar.php';
         break;
-    case 'Vuelos':
-        $controlador = new ControladorVuelo();
+    case 'vuelos':
+        verificaGuardaSesion($res);
+        $controlador = new Controlador($res);
         $controlador->listarVuelos();
         break;
-    case 'Vuelo':
-        $controlador = new ControladorVuelo();
-        $controlador->listarVuelo($parametro[1]);
+    case 'reservarVuelo':
+        verificaGuardaSesion($res);
+        $controlador = new Controlador($res);
+        $controlador->guardarVuelo($res->user->id,$parametro[1]);
         break;
-    case 'Guardar':
-        $controlador = new ControladorVuelo();
-        $controlador->guardarVuelo();
-        break;
-    case 'Eliminar':
-        $controlador = new ControladorVuelo();
+    case 'eliminar':
+        $controlador = new Controlador();
         $controlador->sacarVuelo($parametro[1]);
         break;
-    case 'Modificar':
-        $controlador = new ControladorVuelo();
+    case 'modificar':
+        $controlador = new Controlador();
         $controlador->modificarVuelo($parametro[1], $parametro[2], $parametro[3]);
         break;
-    case 'Usuarios':
+    case 'mostrarLogin':
+        $controladorUser = new ControladorLogin($res);
+        $controladorUser->mostrarLogin();
         break;
-    case 'Usuario':
+    case 'logearse':
+        $controladorUser = new ControladorLogin($res);
+        $controladorUser->login();
+        break;  
+    case 'mostrarRegistrarse':
+        $controladorUser = new ControladorLogin($res);
+        $controladorUser->mostrarRegistro();  
+        break;
+    case 'registrarse':
+        $controladorUser = new ControladorLogin($res);
+        $controladorUser->registrarse();  
+        break;
+    case 'mostrarPerfil':
+        $controladorUser = new ControladorLogin($res);
+        $controladorUser->mostrarPerfil();
+        break;
+    case 'cerrarSesion':
+        $controladorUser = new ControladorLogin($res);
+        $controladorUser->cerrarSesion();
         break;
     default: 
-    echo "404 Page Not Found jaja"; // deberiamos llamar a un controlador que maneje esto
+    echo "404 Page Not Found ..."; // deberiamos llamar a un controlador que maneje esto
     break;
 }

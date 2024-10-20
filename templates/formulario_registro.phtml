@@ -1,0 +1,29 @@
+<?php require_once 'layout/header.phtml' ?>
+
+<?php if ($error): ?>
+    <div class='alert alert-danger' role='alert'>
+        <?= $error ?>
+    </div>
+<?php endif ?>
+
+
+<div class="col-md-10 mx-auto col-lg-5">
+<form method='post' action='registrarse'>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Dirección de correo electrónico</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">Nunca compartiremos tu correo electrónico con nadie más.</div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="clave">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">@</span>
+        <input type="text" class="form-control" id='nombre' placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+</div>
+<?php require_once 'layout/header.phtml' ?>
