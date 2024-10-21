@@ -52,7 +52,7 @@ class ControladorLogin{
 
     function registrarse(){
         if (!isset($_POST['email']) || empty($_POST['email'])) {
-            return $this->vista->mostrarRegistrarse('Falta completar el email ');
+            return $this->vista->mostrarRegistrarse('Falta completar el email ...');
         }
 
         if($this->modelo->existeEmail($_POST['email'])){
@@ -73,14 +73,12 @@ class ControladorLogin{
         $nombre = $_POST['nombre'];
 
         $claveHash = password_hash($clave, PASSWORD_DEFAULT);
-        //luego se deberia guardar los valores en la tabla
+        
+        $this->modelo->addUsuario($nombre,$email,$claveHash);
         
         header('Location: ' . BASE_URL);
     }
 
-    function mostrarPerfil(){
-        $this->vista->mostrarPerfil();
-    }
 
     public function cerrarSesion() {
         session_start(); // Va a buscar la cookie

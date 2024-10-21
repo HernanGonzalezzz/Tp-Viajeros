@@ -11,9 +11,6 @@ class VistaLogin{
         require './templates/formulario_login.phtml';
     }
 
-    function mostrarPerfil(){
-        require './templates/perfil.phtml';
-    }
 
     public function mostrarRegistrarse($error = ""){
         require_once './templates/formulario_registro.phtml';

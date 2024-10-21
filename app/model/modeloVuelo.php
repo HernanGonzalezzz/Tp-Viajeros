@@ -22,8 +22,8 @@ class ModeloVuelo{
     }
 
     function obtenerVuelo($id){
-        $consulta = $this->db->prepare("SELECT * FROM `vuelos` WHERE 'id' = '?'");
-        $consulta->execute($id);
+        $consulta = $this->db->prepare("SELECT * FROM `vuelos` WHERE `id` = ?");
+        $consulta->execute([$id]);
         return $consulta->fetch(PDO::FETCH_OBJ);
     }
 

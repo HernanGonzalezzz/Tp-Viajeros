@@ -22,7 +22,7 @@
                                 <p>Hora salida: <?=date('H:i', strtotime($vuelo->hs_salida)) ?> </p> 
                                 <p>Hora llegada: <?= date('H:i', strtotime($vuelo->hs_llegada))?></p>
 
-                                <a href="reservarVuelo/<?= $vuelo->id ?>" class="btn btn-primary">Reservar</a>
+                                <a href="reservarVuelo/<?= $this->user->id?>/<?= $vuelo->id ?>" class="btn btn-primary" role="button">Reservar</a>
                         </div>
                     </div>
                 </div>

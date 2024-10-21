@@ -24,11 +24,23 @@ class modeloUsuario{
         return $existe;
     }
 
+    function esAdmin($id){
+        $consulta = $this->db->prepare("SELECT `administrador` FROM `usuarios` WHERE `id` = ?");
+        $consulta->execute([$id]);
 
+        return $consulta->fetch(PDO::FETCH_OBJ);
+    }
 
     public function getUsuarioConEmail($email){
         $consulta = $this->db->prepare("SELECT * FROM `usuarios` WHERE `email` = ?");
         $consulta->execute([$email]);
+
+        $usuario = $consulta->fetch(PDO::FETCH_OBJ);
+        return $usuario;
+    }
+    public function getUsuario($id){
+        $consulta = $this->db->prepare("SELECT * FROM `usuarios` WHERE `id` = ?");
+        $consulta->execute([$id]);
 
         $usuario = $consulta->fetch(PDO::FETCH_OBJ);
         return $usuario;
@@ -42,8 +54,22 @@ class modeloUsuario{
         return $usuario;
     }
 
+    function eliminarVuelo($id){
+        $consulta = $this->db->prepare("UPDATE `usuarios` SET `id_vuelo`='NULL' WHERE `id`=?");
+        $consulta->execute([$id]);
+
+        $usuario = $consulta->fetch(PDO::FETCH_OBJ);
+        return $usuario;
+        
+    }
+
     public function addVuelo($idUser, $idVuelo){
         $consulta = $this->db->prepare("UPDATE `usuarios` SET `id_vuelo` = ? WHERE `id`= ?");
         $consulta->execute([$idVuelo,$idUser]);
+    }
+
+    function addUsuario($nombre,$email,$clave){
+        $consulta = $this->db->prepare("INSERT INTO `usuarios`( `nombre`, `email`, `clave`, `administrador`, `id_vuelo`) VALUES (?,?,?,?,?)");
+        $consulta->execute([$nombre,$email,$clave,0,null]);
     }
 }

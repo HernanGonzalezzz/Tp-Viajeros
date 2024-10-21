@@ -20,8 +20,8 @@ if(!empty($_GET['action'])){
 $parametro = explode('/', $action);
 
 switch ($parametro[0]){
-    case 'home':
-        require_once 'saludar.php';
+    case 'prueba':
+        require_once 'prueba.php';
         break;
     case 'vuelos':
         verificaGuardaSesion($res);
@@ -31,10 +31,11 @@ switch ($parametro[0]){
     case 'reservarVuelo':
         verificaGuardaSesion($res);
         $controlador = new Controlador($res);
-        $controlador->guardarVuelo($res->user->id,$parametro[1]);
+        $controlador->guardarVuelo($parametro[1],$parametro[2]);
         break;
-    case 'eliminar':
-        $controlador = new Controlador();
+    case 'eliminarVuelo':
+        verificaGuardaSesion($res);
+        $controlador = new Controlador($res);
         $controlador->sacarVuelo($parametro[1]);
         break;
     case 'modificar':
@@ -58,8 +59,9 @@ switch ($parametro[0]){
         $controladorUser->registrarse();  
         break;
     case 'mostrarPerfil':
-        $controladorUser = new ControladorLogin($res);
-        $controladorUser->mostrarPerfil();
+        verificaGuardaSesion($res);
+        $controlador = new Controlador($res);
+        $controlador->verPerfil($parametro[1]);
         break;
     case 'cerrarSesion':
         $controladorUser = new ControladorLogin($res);

@@ -60,14 +60,16 @@ class Controlador{
 
     function sacarVuelo($id){
         if(isset($id) && !empty($id)){
-            if($ths->modeloVuelo->existe($id)){
-                $this->modeloVuelo->eliminarVuelo($id);
+            if($this->modeloUsuario->tieneVuelo($id)){
+                $this->modeloUsuario->eliminarVuelo($id);
             } else {
                 $this->vista->error('El vuelo no existe');
             }
         } else {
             $this->vista->error('Vuelo no seleccionado');
         }
+        header('Location: ' . BASE_URL);
+
     }
 
     function modificarVuelo($id, $modificar, $valor){
@@ -107,5 +109,23 @@ class Controlador{
                 }
             }
         }
+    }
+
+    
+    function verPerfil($id){
+        if($this->modeloUsuario->esAdmin($id)->administrador ){
+            $vuelos = $this->modeloVuelo->obtenerVuelos();
+            $this->vista->mostrarPerfilAdmistrador($vuelos);
+            return;
+        } else{
+            $vuelo = null;
+            if($this->modeloUsuario->tieneVuelo($id)){
+                $usuario = $this->modeloUsuario->getUsuario($id);
+                $vuelo = $this->modeloVuelo->obtenerVuelo($usuario->id_vuelo);
+            }
+            $this->vista->mostrarPerfil($vuelo);
+            return;
+        }
+
     }
 }

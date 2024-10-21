@@ -1,0 +1,44 @@
+
+
+<?php require_once 'layout/header.phtml';
+    if($this->user->administrador) :?>
+    
+    <h4>Todos los vuelos</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Salida</th>
+                <th scope="col">Destino</th>
+                <th scope="col">Avion</th>
+                <th scope="col">Hs salida</th>
+                <th scope="col">Hs llegada</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Capacidad</th>
+                <th scope="col">URL Imagen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+        $cont = 1;
+        foreach($vuelos as $vuelo) :?>
+        <tr>
+            <th scope="row"><?= $cont++?></th>
+            <td><?= $vuelo->salida?></td>
+            <td><?= $vuelo->destino?></td>
+            <td><?= $vuelo->avion?></td>
+            <td><?= date('H:i', strtotime($vuelo->hs_salida))?></td>
+            <td><?= date('H:i', strtotime($vuelo->hs_llegada))?></td>
+            <td><?= $vuelo->fecha?></td>
+            <td><?= $vuelo->precio?></td>
+            <td><?= $vuelo->capacidad?></td>
+            <td><?= $vuelo->url_Imagen?></td>
+        </tr>
+        <?php endforeach?>
+    </tbody>
+</table>
+
+
+<?php endif ;
+require_once 'layout/footer.phtml';  ?>
