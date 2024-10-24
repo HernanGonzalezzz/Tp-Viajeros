@@ -49,8 +49,8 @@ class Controlador{
             return $this->vista->error('El usuario no existe');
         }
 
-        if(!$this->modeloUsuario->tieneVuelo($idUser)){
-            return $this->vista->error('El usuario ya tiene un vuelo');
+        if($this->modeloUsuario->tieneVuelo($idUser)){
+            return $this->vista->errorVuelo('El usuario ya tiene un vuelo');
         }
 
         $this->modeloUsuario->addVuelo($idUser, $idVuelo);//le agregamos al usuario el vuelo
@@ -63,7 +63,7 @@ class Controlador{
             if($this->modeloUsuario->tieneVuelo($id)){
                 $this->modeloUsuario->eliminarVuelo($id);
             } else {
-                $this->vista->error('El vuelo no existe');
+                $this->vista->error('El usuario no tiene vuelos');
             }
         } else {
             $this->vista->error('Vuelo no seleccionado');

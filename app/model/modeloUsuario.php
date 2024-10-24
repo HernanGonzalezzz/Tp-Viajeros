@@ -47,15 +47,19 @@ class modeloUsuario{
     }
 
     public function tieneVuelo($id){
-        $consulta = $this->db->prepare("SELECT EXISTS(SELECT `id_vuelo` FROM `usuarios` WHERE `id`= ?)");
+        $consulta = $this->db->prepare("SELECT `id_vuelo` FROM `usuarios` WHERE `id`= ?");
         $consulta->execute([$id]);
 
         $usuario = $consulta->fetch(PDO::FETCH_OBJ);
-        return $usuario;
+        if($usuario->id_vuelo == null){
+            return false;
+        } else {
+            return true;
+        }
     }
 
     function eliminarVuelo($id){
-        $consulta = $this->db->prepare("UPDATE `usuarios` SET `id_vuelo`='NULL' WHERE `id`=?");
+        $consulta = $this->db->prepare("UPDATE `usuarios` SET `id_vuelo`=NULL WHERE `id`=?");
         $consulta->execute([$id]);
 
         $usuario = $consulta->fetch(PDO::FETCH_OBJ);

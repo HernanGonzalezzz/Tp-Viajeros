@@ -11,12 +11,14 @@ class Vista{
         require_once './templates/lista_vuelos.phtml';
     }
 
-    public function mostrarVuelo($vuelo){
-        //require_once ''
-    }
 
     public function error($mensaje){
         require_once './templates/error.phtml';
+    }
+
+    public function errorVuelo($mensaje){
+        require_once './templates/error.phtml';
+        require_once './templates/lista_vuelos.phtml';
     }
 
     public function mostrarPerfil($vuelo){

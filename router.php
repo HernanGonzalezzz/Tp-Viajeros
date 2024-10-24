@@ -61,7 +61,7 @@ switch ($parametro[0]){
     case 'mostrarPerfil':
         verificaGuardaSesion($res);
         $controlador = new Controlador($res);
-        $controlador->verPerfil($parametro[1]);
+        $controlador->verPerfil($res->user->id);
         break;
     case 'cerrarSesion':
         $controladorUser = new ControladorLogin($res);
