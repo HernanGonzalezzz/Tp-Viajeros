@@ -35,6 +35,7 @@ class ControladorLogin{
             // Guardo en la sesión el ID del usuario
             session_start();
             $_SESSION['id_user'] = $usuarioDB->id;
+            $_SESSION['nombre'] = $usuarioDB->nombre;
             $_SESSION['email'] = $usuarioDB->email;
             $_SESSION['administrador'] = $usuarioDB->administrador;
     
@@ -79,6 +80,44 @@ class ControladorLogin{
         header('Location: ' . BASE_URL);
     }
 
+    public function mostrarModificarUsuario(){
+        $this->vista->mostrarModificarUsuario();
+    }
+
+    public function editarUsuario($id){
+        if (!empty($_POST['email'])) {
+            if($this->modelo->existeEmail($_POST['email'])){
+                return $this->vista->mostrarModificarUsuario('El email ya se encuentra registrado');
+            }else{
+                echo "modifico el mail";
+                $email = $_POST['email'];
+                $this->modelo->modificarEmail($id,$email);
+            }
+        }
+
+        if (!empty($_POST['nombre'])) {
+            $nombre = $_POST['nombre'];
+            $this->modelo->modificarNombre($id,$nombre);
+            
+        }
+
+        if( !empty($_POST['claveVieja'])){
+            $usuario = $this->modelo->getUsuario($id);
+            $claveVieja = $_POST['claveVieja'];
+            if(password_verify($claveVieja, $usuario->clave)){
+                if (isset($_POST['claveNueva']) || !empty($_POST['claveNueva'])){
+                    $clave = $_POST['claveNueva'];
+                    $claveHash = password_hash($clave, PASSWORD_DEFAULT);
+                    $this->modelo->modificarClave($id, $claveHash);
+                }else{
+                    return $this->vista->mostrarModificarUsuario('Ingrese una clave nueva');
+                }
+            } else{
+                return $this->vista->mostrarModificarUsuario('La clave vieja es incorrecta');
+            }
+        }
+        header('Location: ' . BASE_URL);
+    }
 
     public function cerrarSesion() {
         session_start(); // Va a buscar la cookie

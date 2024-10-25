@@ -4,6 +4,7 @@
         if(isset($_SESSION['id_user'])){
             $res->user = new stdClass();
             $res->user->id = $_SESSION['id_user'];
+            $res->user->nombre = $_SESSION['nombre'];
             $res->user->email = $_SESSION['email'];
             $res->user->administrador = $_SESSION['administrador'];
             return;

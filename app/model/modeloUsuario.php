@@ -76,4 +76,19 @@ class modeloUsuario{
         $consulta = $this->db->prepare("INSERT INTO `usuarios`( `nombre`, `email`, `clave`, `administrador`, `id_vuelo`) VALUES (?,?,?,?,?)");
         $consulta->execute([$nombre,$email,$clave,0,null]);
     }
+
+    public function modificarEmail($id, $email){
+        $consulta = $this->db->prepare("UPDATE `usuarios` SET `email`=? WHERE `id`=?");
+        $consulta->execute([$email,$id]);
+    }
+
+    public function modificarNombre($id, $nombre){
+        $consulta = $this->db->prepare("UPDATE `usuarios` SET `nombre`=? WHERE `id`=?");
+        $consulta->execute([$nombre,$id]);
+    }
+    
+    public function modificarClave($id, $clave){
+        $consulta = $this->db->prepare("UPDATE `usuarios` SET `clave`=? WHERE `id`=?");
+        $consulta->execute([$clave,$id]);
+    }
 }

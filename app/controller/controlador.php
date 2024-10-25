@@ -119,11 +119,11 @@ class Controlador{
             return;
         } else{
             $vuelo = null;
-            if($this->modeloUsuario->tieneVuelo($id)){
-                $usuario = $this->modeloUsuario->getUsuario($id);
+            $usuario = $this->modeloUsuario->getUsuario($id);
+            if($usuario->id_vuelo=NULL){
                 $vuelo = $this->modeloVuelo->obtenerVuelo($usuario->id_vuelo);
             }
-            $this->vista->mostrarPerfil($vuelo);
+            $this->vista->mostrarPerfil($vuelo, $usuario);
             return;
         }
 

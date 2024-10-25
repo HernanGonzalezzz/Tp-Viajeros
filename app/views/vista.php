@@ -21,7 +21,7 @@ class Vista{
         require_once './templates/lista_vuelos.phtml';
     }
 
-    public function mostrarPerfil($vuelo){
+    public function mostrarPerfil($vuelo, $usuario){
         require_once './templates/perfil.phtml';
     }
     
