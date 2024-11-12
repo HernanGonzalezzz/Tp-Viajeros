@@ -1,0 +1,33 @@
+<?php require_once 'templates/layout/header.phtml' ?>
+
+<?php if ($error): ?>
+    <div class='alert alert-danger' role='alert'>
+        <?= $error ?>
+    </div>
+<?php endif ?>
+
+
+<h3 class="mx-5 mt-4 fst-italic text-body-tertiary">Insertar usuario</h3>
+
+<form class="row g-3" method='post' action='cargarInsertar/Usuario'>
+  <div class="col-md-4">
+    <label for="validationServer01" class="form-label">Nombre </label>
+    <input type="text" name="nombre" class="form-control" id="validationServer01">
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer02" class="form-label">Apellido </label>
+    <input type="text" name="apellido" class="form-control" id="apellido">
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer03" class="form-label">Email</label>
+    <input type="email" name="email" class="form-control" id="email">
+  </div>
+  
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Guardar</button>
+  </div>
+</form>
+
+
+
+<?php require_once 'templates/layout/header.phtml' ?>

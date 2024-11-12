@@ -1,0 +1,57 @@
+<?php require_once 'templates/layout/header.phtml' ?>
+
+<?php if ($error): ?>
+    <div class='alert alert-danger' role='alert'>
+        <?= $error ?>
+    </div>
+<?php endif ?>
+
+
+<h3 class="mx-5 mt-4 fst-italic text-body-tertiary">Insertar vuelo</h3>
+
+<form class="row g-3" method='post' action='cargarInsertar/Vuelo'>
+  <div class="col-md-4">
+    <label for="validationServer01" class="form-label">Salida </label>
+    <input type="text" name="salida" class="form-control" id="validationServer01">
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer02" class="form-label">Destino </label>
+    <input type="text" name="destino" class="form-control" id="destino">
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer03" class="form-label">Avion</label>
+    <input type="text" name="avion" class="form-control" id="avion">
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer05" class="form-label" _msttexthash="182013" _msthash="26">Hora Salida</label>
+    <input type="time" class="form-control" id="hs_salida" name="hs_salida">
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer05" class="form-label" _msttexthash="182013" _msthash="26">Hora Llegada</label>
+    <input type="time" class="form-control" id="hs_llegada" name="hs_llegada">
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer05" class="form-label" _msttexthash="182013" _msthash="26">Fecha</label>
+    <input type="date" class="form-control" id="fecha" name="fecha">
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer05" class="form-label" _msttexthash="182013" _msthash="26">Precio</label>
+    <input type="number" class="form-control" id="precio" name="precio">
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer05" class="form-label" _msttexthash="182013" _msthash="26">Capacidad</label>
+    <input type="number" class="form-control" id="capacidad" name="capacidad" >
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer05" class="form-label" _msttexthash="182013" _msthash="26">Url Imagen</label>
+    <input type="text" class="form-control" id="url_Imagen" name="url_Imagen" >
+  </div>
+  
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Guardar</button>
+  </div>
+</form>
+
+
+
+<?php require_once 'templates/layout/header.phtml' ?>

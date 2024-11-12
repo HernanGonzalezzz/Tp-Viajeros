@@ -1,0 +1,34 @@
+<?php require_once 'layout/header.phtml'; ?>
+
+
+<div class="container textx-center">
+
+    <div class="container textx-center row">
+        <h3 class="col-md-2 fst-italic text-body-tertiary">Usuarios</h3>
+        <?php if($this->user): ?>
+            <a  href="Insertar/Usuario" class="col-1 btn btn-success" role="button">Agregar</a>
+        <?php endif ?>
+    </div>
+    <?php foreach($usuarios as $usuario):?>
+    <ul class="list-group list-group-horizontal mx-5 mt-2">
+        <li class="list-group-item fst-italic" >Nombre: <br><?= $usuario->nombre ?></li>
+        <li class="list-group-item fst-italic"> Apellido: <br><?= $usuario->apellido?></li>
+        <li class="list-group-item fst-italic"> Email: <br><?= $usuario->email ?></li>
+        <?php if($this->user): ?>
+            <li class="list-group-item fst-italic">
+                <a  href="MostrarEditar/Usuario/<?= $usuario->id ?>" class="btn btn-primary" role="button">Editar</a>
+            </li>
+            <li class="list-group-item fst-italic">
+                <a  href="Eliminar/Usuario/<?= $usuario->id ?>" class="btn btn-danger" role="button">Eliminar</a>
+            </li>
+        <?php endif ?>
+    </ul>
+    <?php endforeach ?>
+</div>
+
+
+
+
+
+
+<?php require_once 'layout/footer.phtml'; ?>

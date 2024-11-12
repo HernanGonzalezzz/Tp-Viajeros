@@ -1,0 +1,35 @@
+<?php require_once 'layout/header.phtml'; ?>
+
+
+<div class="container textx-center">
+
+    <h3 class="mx-5 mt-4 fst-italic text-body-tertiary">Vuelo <?= $vuelo->id?></h3>
+    <ul class="list-group list-group-horizontal mx-5 mt-2">
+        <li class="list-group-item fst-italic" >Salida: <br><?= $vuelo->salida ?></li>
+        <li class="list-group-item fst-italic"> Destino: <br><?= $vuelo->destino?></li>
+        <li class="list-group-item fst-italic"> Avion: <br><?= $vuelo->avion ?></li>
+        <li class="list-group-item fst-italic">Fecha: <br><?= $vuelo->fecha ?></li>
+        <li class="list-group-item fst-italic">Hs Salida: <br><?= date('H:i', strtotime($vuelo->hs_salida)) ?></li>
+        <li class="list-group-item fst-italic">Hs Llegada: <br><?= date('H:i', strtotime($vuelo->hs_llegada)) ?></li>
+        <li class="list-group-item fst-italic">Precio: <br>$<?= $vuelo->precio ?></li>
+        <li class="list-group-item fst-italic">Capacidad: <br><?= $vuelo->capacidad ?></li>
+    </ul>
+
+
+    <h3 class="mx-5 mt-4 fst-italic text-body-tertiary">Pasajeros: <?= count($usuarios) ?></h3>
+    <?php  foreach($usuarios as $usuario) :?>
+    <ul class="list-group list-group-horizontal mx-5">
+        <li class="list-group-item fw-semibold" ><?php echo $usuario->nombre ?></li>
+        <li class="list-group-item fw-semibold" ><?php echo $usuario->apellido ?></li>
+        <li class="list-group-item fst-italic"><?php echo $usuario->email ?></li>
+    </ul>
+    <?php endforeach ; ?>
+    
+</div>
+
+
+
+
+
+
+<?php require_once 'layout/footer.phtml'; ?>

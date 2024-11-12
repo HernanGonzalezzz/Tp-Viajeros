@@ -1,0 +1,50 @@
+<?php require_once 'templates/layout/header.phtml' ?>
+
+<?php if ($error): ?>
+    <div class='alert alert-danger' role='alert'>
+        <?= $error ?>
+    </div>
+<?php endif ?>
+
+<form class="row g-3" method='post' action='cargarEditar/Usuario/<?= $usuario->id?>'>
+  <div class="col-md-4">
+    <label for="validationServer01" class="form-label">Nombre</label>
+    <input type="text" name="nombre" class="form-control" id="validationServer01" value="<?= $usuario->nombre?>">
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer01" class="form-label">Apellido</label>
+    <input type="text" name="apellido" class="form-control" id="validationServer01" value="<?= $usuario->apellido?>">
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="validationServer02" class="form-label">Email</label>
+    <input type="email" name="email" class="form-control" id="inputEmail4" value="<?= $usuario->email?>">
+  </div>
+</div>
+<div class="col-md-4">
+    <label for="validationServer02" class="form-label">Vuelos</label>
+    <select class="form-select" name='id_vuelo' aria-label="Default select example">
+      <?php if($vueloUsuario){ ?>
+        <option value=<?= $vueloUsuario->id ?>><?= $vueloUsuario->salida?> | <?= $vueloUsuario->destino?></option>
+      <?php } else {?>
+        <option value="" selected>Vuelos disponibles</option>
+      <?php }?>
+      <?php foreach($vuelos as $vuelo): ?>
+        <option value=<?= $vuelo->id ?>><?=$vuelo->salida?>|<?=$vuelo->destino?></option>
+      <?php endforeach ?>
+    </select>
+  </div>
+  
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Guardar</button>
+  </div>
+</form>
+
+
+
+<?php require_once 'templates/layout/header.phtml' ?>

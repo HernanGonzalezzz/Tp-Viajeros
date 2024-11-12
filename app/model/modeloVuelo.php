@@ -1,11 +1,8 @@
 <?php
 
-class ModeloVuelo{
-    private $db;
+require_once 'modelo.php';
 
-    public function __construct(){
-        $this->db =  new PDO('mysql:host=localhost;dbname=tp_web;charset=utf8', 'root', '');
-    }
+class ModeloVuelo extends Modelo{
 
     public function existe($id){
         $consulta = $this->db->prepare("SELECT EXISTS( SELECT 1 FROM `vuelos` WHERE `id` = ? )");
@@ -27,6 +24,7 @@ class ModeloVuelo{
         return $consulta->fetch(PDO::FETCH_OBJ);
     }
 
+
     function agregarVuelo($salida, $destino, $avion, $hsSalida, $hsLlegada, $fecha, $precio, $capacidad, $url){
         $consulta = $this->db->prepare("INSERT INTO `vuelos`(`salida`, `destino`, `avion`, `hs_salida`, `hs_llegada`, `fecha`, `precio`, `capacidad`, 'url_Imagen') VALUES ('?','?','?','?','?','?','?','?','?')");
         $consulta->execute([$salida, $destino, $avion, $hsSalida, $hsLlegada, $fecha, $precio, $capacidad, $url]);
@@ -38,40 +36,14 @@ class ModeloVuelo{
         $consulta->execute([$id]);
     }
 
-    function modificarSalida($id, $valor){
-        $consulta = $this->db->prepare("UPDATE `vuelos` SET `salida` = ? WHERE 'id'= ?");
-        $consulta->execute([$valor, $id]);
+    function modificarVuelo($salida,$destino,$avion,$hs_salida,$hs_llegada,$fecha,$precio,$capacidad, $url_Imagen,$id){
+        $consulta = $this->db->prepare("UPDATE `vuelos` SET `salida`=?,`destino`=?,`avion`=?,`hs_salida`=?,`hs_llegada`=?,`fecha`=?,`precio`=?,`capacidad`=?, `url_Imagen`=? WHERE `id`=?");
+        $consulta->execute([$salida,$destino,$avion,$hs_salida,$hs_llegada,$fecha,$precio,$capacidad, $url_Imagen,$id]);
     }
-    function modificarDestino($id, $valor){
-        $consulta = $this->db->prepare("UPDATE `vuelos` SET `destino` = ? WHERE 'id'= ?");
-        $consulta->execute([$valor, $id]);
+
+    function insertarVuelo($salida,$destino,$avion,$hs_salida,$hs_llegada,$fecha,$precio,$capacidad, $url_Imagen){
+        $consulta = $this->db->prepare("INSERT INTO `vuelos`(`salida`, `destino`, `avion`, `hs_salida`, `hs_llegada`, `fecha`, `precio`, `capacidad`, `url_Imagen`) VALUES (?,?,?,?,?,?,?,?,?)");
+        $consulta->execute([$salida,$destino,$avion,$hs_salida,$hs_llegada,$fecha,$precio,$capacidad, $url_Imagen]);
     }
-    function modificarAvion($id, $valor){
-        $consulta = $this->db->prepare("UPDATE `vuelos` SET `avion` = ? WHERE 'id'= ?");
-        $consulta->execute([$valor, $id]);
-    }
-    function modificarHsSalida($id, $valor){
-        $consulta = $this->db->prepare("UPDATE `vuelos` SET `hs_salida` = ? WHERE 'id'= ?");
-        $consulta->execute([$valor, $id]);
-    }
-    function modificarHsLlegada($id, $valor){
-        $consulta = $this->db->prepare("UPDATE `vuelos` SET `hs_llegada` = ? WHERE 'id'= ?");
-        $consulta->execute([$valor, $id]);
-    }
-    function modificarFecha($id, $valor){
-        $consulta = $this->db->prepare("UPDATE `vuelos` SET `fecha` = ? WHERE 'id'= ?");
-        $consulta->execute([$valor, $id]);
-    }
-    function modificarPrecio($id, $valor){
-        $consulta = $this->db->prepare("UPDATE `vuelos` SET `precio` = ? WHERE 'id'= ?");
-        $consulta->execute([$valor, $id]);
-    }
-    function modificarCapacidad($id, $valor){
-        $consulta = $this->db->prepare("UPDATE `vuelos` SET `capacidad` = ? WHERE 'id'= ?");
-        $consulta->execute([$valor, $id]);
-    }
-    function modificarImagen($id, $valor){
-        $consulta = $this->db->prepare("UPDATE `vuelos` SET `url_Imagen` = ? WHERE 'id'= ?");
-        $consulta->execute([$valor, $id]);
-    }
+    
 }

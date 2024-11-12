@@ -2,42 +2,134 @@
 
 require_once './libs/response.php';
 require_once './app/middlewares/guardaSesion.php';
-require_once './app/controller/controlador.php';
+require_once './app/controller/controladorUsuario.php';
+require_once './app/controller/controladorVuelo.php';
 require_once './app/controller/controladorLogin.php';
+require_once './app/controller/controladorError.php';
 
 // base_url para redirecciones y base tag
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
 $res = new Response(); //Donde guardamos el usuario si es que existe
 
-$action = 'vuelos';
+$action = 'Vuelos';
 
 if(!empty($_GET['action'])){
     $action = $_GET['action'];
 }
 
 // parsea la accion para separar accion real de parametros
-$parametro = explode('/', $action);
+$parametro = explode("/",trim($action,'/'));
 
 switch ($parametro[0]){
-    case 'vuelos':
-        verificaGuardaSesion($res);
-        $controlador = new Controlador($res);
-        $controlador->listarVuelos();
+    case 'Vuelos':
+        verificaSesion($res);
+        $controlador = new ControladorVuelo($res);
+        if(isset($parametro[1])){
+            $controlador->detallarVuelo($parametro[1]);
+        }else {
+            $controlador->listarVuelos();
+        }
         break;
-    case 'reservarVuelo':
-        verificaGuardaSesion($res);
-        $controlador = new Controlador($res);
-        $controlador->guardarVuelo($parametro[1],$parametro[2]);
+    case 'Cliente':
+        verificaSesion($res);
+        $controlador = new ControladorUsuario($res);
+        $controlador->listarClientes();
         break;
-    case 'eliminarVuelo':
-        verificaGuardaSesion($res);
-        $controlador = new Controlador($res);
-        $controlador->sacarVuelo($parametro[1]);
+    case 'MostrarEditar':
+        obligaLogin($res);
+        if(!isset($parametro[1]))
+            header('Location: ' . BASE_URL);
+        switch($parametro[1]){
+            case 'Usuario':
+                $controlador = new ControladorUsuario($res);
+                $controlador->mostrarEditar($parametro[2]);
+                break;
+            case 'Vuelo':
+                $controlador = new ControladorVuelo($res);
+                $controlador->mostrarEditar($parametro[2]);
+                break;
+            default:  
+                $controlador = new ControladorError($res);
+                $controlador->error('Error al mostrar la tabla');
+                break;
+        }
         break;
-    case 'modificar':
-        $controlador = new Controlador();
-        $controlador->modificarVuelo($parametro[1], $parametro[2], $parametro[3]);
+    case 'cargarEditar':
+        obligaLogin($res);
+        if(!isset($parametro[1]))
+            header('Location: ' . BASE_URL);
+        switch($parametro[1]){
+            case 'Usuario':
+                $controlador = new ControladorUsuario($res);
+                $controlador->editar($parametro[2]);
+                break;
+                case 'Vuelo':
+                    $controlador = new ControladorVuelo($res);
+                    $controlador->editar($parametro[2]);
+                break;
+            default:  
+                $controlador = new ControladorError($res);
+                $controlador->error('No se pudo ingresar los valores');
+                break;
+        }
+        break;
+    case 'Insertar':
+        obligaLogin($res);
+        if(!isset($parametro[1]))
+            header('Location: ' . BASE_URL);
+        switch($parametro[1]){
+            case 'Usuario':
+                $controlador = new ControladorUsuario($res);
+                $controlador->mostrarInsertar();
+                break;
+                case 'Vuelo':
+                    $controlador = new ControladorVuelo($res);
+                    $controlador->mostrarInsertar();
+                break;
+            default:  
+                $controlador = new ControladorError($res);
+                $controlador->error('Error al mostrar la tabla');
+                break;
+        }
+        break;
+    case 'cargarInsertar':
+        obligaLogin($res);
+        if(!isset($parametro[1]))
+            header('Location: ' . BASE_URL);
+        switch($parametro[1]){
+            case 'Usuario':
+                $controlador = new ControladorUsuario($res);
+                $controlador->Insertar();
+                break;
+            case 'Vuelo':
+                $controlador = new ControladorVuelo($res);
+                $controlador->Insertar();
+                break;
+            default: 
+                $controlador = new ControladorError($res);
+                $controlador->error('No se pudo ingresar los valores');
+                break;
+            }
+        break;
+    case 'Eliminar':
+        obligaLogin($res);
+        if(!isset($parametro[1]))
+            header('Location: ' . BASE_URL);
+        switch($parametro[1]){
+            case 'Usuario':
+                $controlador = new ControladorUsuario($res);
+                $controlador->eliminar($parametro[2]);
+                break;
+            case 'Vuelo':
+                $controlador = new ControladorVuelo($res);
+                $controlador->eliminar($parametro[2]);
+                break;
+            default:  
+                $controlador = new ControladorError($res);
+                $controlador->error('No se pudo eliminar el elemento');
+                break;
+            }
         break;
     case 'mostrarLogin':
         $controladorUser = new ControladorLogin($res);
@@ -47,31 +139,8 @@ switch ($parametro[0]){
         $controladorUser = new ControladorLogin($res);
         $controladorUser->login();
         break;  
-    case 'mostrarRegistrarse':
-        $controladorUser = new ControladorLogin($res);
-        $controladorUser->mostrarRegistro();  
-        break;
-    case 'registrarse':
-        verificaGuardaSesion($res);
-        $controladorUser = new ControladorLogin($res);
-        $controladorUser->registrarse();  
-        break;
-    case 'mostrarPerfil':
-        verificaGuardaSesion($res);
-        $controlador = new Controlador($res);
-        $controlador->verPerfil($res->user->id);
-        break;
-    case 'mostrarModificarUsuario':
-        verificaGuardaSesion($res);
-        $controlador = new ControladorLogin($res);
-        $controlador->mostrarModificarUsuario();
-        break;
-    case 'cargarEditarUsuario':
-        verificaGuardaSesion($res);
-        $controlador = new ControladorLogin($res);
-        $controlador->editarUsuario($res->user->id);
-        break;
     case 'cerrarSesion':
+        obligaLogin($res);
         $controladorUser = new ControladorLogin($res);
         $controladorUser->cerrarSesion();
         break;
