@@ -34,6 +34,14 @@ class ModeloUsuario extends Modelo{
         $usuario = $consulta->fetchAll(PDO::FETCH_OBJ);
         return $usuario;
     }
+
+    public function obtenerUsuariosConVuelo($id_vuelo){
+        $consulta = $this->db->prepare("SELECT * FROM `usuarios` WHERE `id_vuelo`= ?");
+        $consulta->execute([$id_vuelo]);
+
+        $usuarios = $consulta->fetchall(PDO::FETCH_OBJ);
+        return $usuarios;
+    }
     
     public function obtenerUsuarioConEmail($email){
         $consulta = $this->db->prepare("SELECT * FROM `usuarios` WHERE `email`= ?");
@@ -42,23 +50,21 @@ class ModeloUsuario extends Modelo{
         $usuario = $consulta->fetch(PDO::FETCH_OBJ);
         return $usuario;
     }
-    public function obtenerUsuariosConVuelo($id_vuelo){
-        $consulta = $this->db->prepare("SELECT * FROM `usuarios` WHERE `id_vuelo`= ?");
-        $consulta->execute([$id_vuelo]);
-
-        $usuarios = $consulta->fetchall(PDO::FETCH_OBJ);
-        return $usuarios;
-    }
-
 
     function agregarUsuario($nombre,$apellido,$email){
-        $consulta = $this->db->prepare("INSERT INTO `usuarios`(`nombre`, `apellido`, `email`) VALUES (?,?,?)");
+        $consulta = $this->db->prepare("INSERT INTO `usuarios`( `nombre`, `apellido`, `email`, `id_vuelo`) VALUES (?,?,?, null)");
         $consulta->execute([$nombre,$apellido,$email]);
     }
 
     public function modificarUsuario($nombre, $apellido, $email, $id_vuelo, $id){
         $consulta = $this->db->prepare("UPDATE `usuarios` SET `nombre`=?,`apellido`=?,`email`=?,`id_vuelo`=? WHERE `id`=?");
         $consulta->execute([$nombre, $apellido, $email, $id_vuelo, $id]);
+    }
+
+    
+    public function eliminarVuelo($id){
+        $consulta = $this->db->prepare("UPDATE `usuarios` SET `id_vuelo`=null WHERE `id`=?");
+        $consulta->execute([$id]);
     }
 
 

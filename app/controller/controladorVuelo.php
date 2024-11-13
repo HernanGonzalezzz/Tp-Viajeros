@@ -147,7 +147,15 @@ class ControladorVuelo{
         if(!$this->modeloVuelo->existe($id)){
             return $this->vista->error('El vuelo que quiere eliminar no existe');
         }
-        $this->modeloVuelo->eliminarVuelo($id);
+        $usuarios = $this->modeloUsuario->obtenerUsuariosConVuelo($id);
+        if(!$usuarios){ //Le borramos la clave foranea a los usuarios que esten en el vuelo
+            $this->modeloVuelo->eliminarVuelo($id);
+        } else {
+            foreach($usuarios as $user){
+                $this->modeloUsuario->eliminarVuelo($user->id);
+            }
+            $this->modeloVuelo->eliminarVuelo($id);
+        }
         header('Location: ' . BASE_URL . 'Vuelos');
     }
 }
