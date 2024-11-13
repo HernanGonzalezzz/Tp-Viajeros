@@ -38,9 +38,9 @@ Acceso Publico:
      -URL = /Vuelos
 - Detalle de un vuelo: Se muestra el detalle del vuelo y los usuarios que son pasajeros.
      - URL= /Vuelos/:id
--Listado de Usuarios: Se muestan todos los usuarios disponibles.
+- Listado de Usuarios: Se muestan todos los usuarios disponibles.
      - URL= /Clientes
--Acceder al login: Se muestra el formulario para logearse.
+- Acceder al login: Se muestra el formulario para logearse.
      - URL= /mostrarLogin
  
        
