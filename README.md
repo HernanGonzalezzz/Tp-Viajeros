@@ -47,17 +47,17 @@ Acceso Publico:
 Acceso de Administrador:
 
 - Editar vuelos: Se muestra el formulario con los datos de los vuelo que se pueden modificar.
-      - URL= /MostrarEditar/Vuelo/:id
+     - URL= /MostrarEditar/Vuelo/:id
 - Editar usuario: Se muestra el formulario con los datos del usuario que se pueden modificar.
-      - URL= /MostrarEditar/Usuario/:id
+     - URL= /MostrarEditar/Usuario/:id
 - Ingresar un vuelo:
-      - URL= /Insertar/Vuelo
+     - URL= /Insertar/Vuelo
 - Ingresar un usuario:
-      - URL= /Insertar/Usuario
+     - URL= /Insertar/Usuario
 - Eliminar un vuelo: 
-      - URL= /Eliminar/Vuelo/:id
+     - URL= /Eliminar/Vuelo/:id
 - Eliminar un usuario: 
-      - URL= /Eliminar/Usuario/:id
+     - URL= /Eliminar/Usuario/:id
 - Cerrar sesion: 
-      - URL= /cerrarSesion
+     - URL= /cerrarSesion
 
