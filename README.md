@@ -35,7 +35,7 @@ El acceso para el administrador es:
 Acceso Publico:
 
 - Listado de Vuelos: Se muestran todos lo vuelos disponibles de la pagina.
-     -URL = /Vuelos
+     - URL = /Vuelos
 - Detalle de un vuelo: Se muestra el detalle del vuelo y los usuarios que son pasajeros.
      - URL= /Vuelos/:id
 - Listado de Usuarios: Se muestan todos los usuarios disponibles.
@@ -46,18 +46,18 @@ Acceso Publico:
        
 Acceso de Administrador:
 
--Editar vuelos: Se muestra el formulario con los datos de los vuelo que se pueden modificar.
-      -URL= /MostrarEditar/Vuelo/:id
--Editar usuario: Se muestra el formulario con los datos del usuario que se pueden modificar.
-      -URL= /MostrarEditar/Usuario/:id
--Ingresar un vuelo:
-      -URL= /Insertar/Vuelo
--Ingresar un usuario:
-      -URL= /Insertar/Usuario
--Eliminar un vuelo: 
-      -URL= /Eliminar/Vuelo/:id
--Eliminar un usuario: 
-      -URL= /Eliminar/Usuario/:id
--Cerrar sesion: 
-      -URL= /cerrarSesion
+- Editar vuelos: Se muestra el formulario con los datos de los vuelo que se pueden modificar.
+      - URL= /MostrarEditar/Vuelo/:id
+- Editar usuario: Se muestra el formulario con los datos del usuario que se pueden modificar.
+      - URL= /MostrarEditar/Usuario/:id
+- Ingresar un vuelo:
+      - URL= /Insertar/Vuelo
+- Ingresar un usuario:
+      - URL= /Insertar/Usuario
+- Eliminar un vuelo: 
+      - URL= /Eliminar/Vuelo/:id
+- Eliminar un usuario: 
+      - URL= /Eliminar/Usuario/:id
+- Cerrar sesion: 
+      - URL= /cerrarSesion
 
